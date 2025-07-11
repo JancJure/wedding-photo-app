@@ -1,0 +1,32 @@
+export const templates = [
+  {
+    id: 'template1',
+    name: 'Template 1',
+    image: '/templates/QR_CODE_TEMPLATE1.svg',
+    width: 1080,
+    height: 1600,
+    qr: { x: 400, y: 1150, size: 240 },
+    names: { x: 540, y: 1420, font: '28px serif', color: '#222' },
+    date: { x: 540, y: 1470, font: '28px serif', color: '#222' },
+  },
+  {
+    id: 'template2',
+    name: 'Template 2',
+    image: '/templates/QR_CODE_TEMPLATE2.svg',
+    width: 1080,
+    height: 1600,
+    qr: { x: 400, y: 1140, size: 240 },
+    names: { x: 540, y: 1400, font: '28px serif', color: '#222' },
+    date: { x: 540, y: 1445, font: '28px serif', color: '#222' },
+  },
+  {
+    id: 'template3',
+    name: 'Template 3',
+    image: '/templates/QR_CODE_TEMPLATE3.svg',
+    width: 1080,
+    height: 1600,
+    qr: { x: 410, y: 1160, size: 240 },
+    names: { x: 540, y: 1410, font: '28px serif', color: '#222' },
+    date: { x: 540, y: 1450, font: '28px serif', color: '#222' },
+  },
+]; 

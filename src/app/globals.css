@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide default date and time input icons */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/* Custom styles for form inputs */
+input[type="date"],
+input[type="time"] {
+  position: relative;
+}
+
+/* Ensure icons stay on top */
+.input-icon {
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Print styles */
+@media print {
+  /* Hide everything except the QR code template */
+  body > *:not(.print-only) {
+    display: none !important;
+  }
+
+  /* Show only the QR code template */
+  .print-only {
+    display: block !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    background-color: white;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Remove any backgrounds that might interfere with printing */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Ensure the QR code is centered and properly sized */
+  canvas {
+    display: block;
+    margin: 0 auto;
+    page-break-inside: avoid;
+  }
+
+  /* Hide non-printable elements */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset any background images for printing */
+  [class*="bg-[url"] {
+    background-image: none !important;
+  }
+
+  /* Ensure proper page margins */
+  @page {
+    margin: 0.5cm;
+    size: auto;
+  }
+} 
