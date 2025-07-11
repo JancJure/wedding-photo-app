@@ -1,4 +1,0 @@
-{
-  "/not-found": "app/not-found.js",
-  "/event/[eventId]/page": "app/event/[eventId]/page.js"
-}
