@@ -27,7 +27,7 @@ export default function CreateEvent() {
         alert('Failed to create event. Please try again.');
         return;
       }
-      router.push(`/qr-design/${eventId}`);
+      window.location.href = `/qr-design/${eventId}`;
     } catch (err: any) {
       console.error('Error in handleSubmit:', err);
       alert('Unexpected error: ' + (err?.message || err));
