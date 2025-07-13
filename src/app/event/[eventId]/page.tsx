@@ -3,15 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
-
-interface EventData {
-  partner1Name: string;
-  partner2Name: string;
-  weddingDate: string;
-  venue: string;
-  time: string;
-  specialMessage: string;
-}
+import { getEventById, EventData } from '@/lib/supabaseEvent';
 
 export default function EventPage({ params }: { params: { eventId: string } }) {
   const router = useRouter();
@@ -21,16 +13,16 @@ export default function EventPage({ params }: { params: { eventId: string } }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Load event data from localStorage
-    const storedData = localStorage.getItem(`event-${params.eventId}`);
-    if (!storedData) {
-      router.push('/');
-      return;
+    async function fetchEvent() {
+      const data = await getEventById(params.eventId);
+      if (!data) {
+        router.push('/');
+        return;
+      }
+      setEventData(data);
+      fetchPhotos();
     }
-    const data = JSON.parse(storedData);
-    setEventData(data);
-    // Load existing photos from Supabase
-    fetchPhotos();
+    fetchEvent();
     // eslint-disable-next-line
   }, [params.eventId]);
 

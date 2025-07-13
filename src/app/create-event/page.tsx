@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FaArrowLeft, FaCalendar, FaMapMarkerAlt, FaClock, FaHeart } from 'react-icons/fa';
+import { createEvent } from '@/lib/supabaseEvent';
 
 export default function CreateEvent() {
   const router = useRouter();
@@ -19,15 +20,13 @@ export default function CreateEvent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Generate a unique event ID (we'll use timestamp + random string for now)
-    const eventId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    
-    // For now, we'll just store the data in localStorage and redirect
-    // Later we'll integrate with Firebase
-    localStorage.setItem(`event-${eventId}`, JSON.stringify(formData));
-    
-    // Redirect to the QR code design page
+    // Store event in Supabase
+    const eventId = await createEvent(formData);
+    if (!eventId) {
+      alert('Failed to create event. Please try again.');
+      return;
+    }
+    // Redirect to QR design with new eventId
     router.push(`/qr-design/${eventId}`);
   };
 

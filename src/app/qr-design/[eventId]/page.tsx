@@ -34,7 +34,8 @@ export default function QRDesign({ params }: { params: { eventId: string } }) {
     setEventData(data);
 
     // Generate QR code URL
-    const eventUrl = `${window.location.origin}/event/${params.eventId}`;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin;
+    const eventUrl = `${baseUrl}/event/${params.eventId}`;
     QRCode.toDataURL(eventUrl, {
       width: 400,
       margin: 2,
