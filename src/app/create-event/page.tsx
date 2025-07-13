@@ -20,14 +20,18 @@ export default function CreateEvent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Store event in Supabase
-    const eventId = await createEvent(formData);
-    if (!eventId) {
-      alert('Failed to create event. Please try again.');
-      return;
+    try {
+      const eventId = await createEvent(formData);
+      console.log('Supabase returned eventId:', eventId);
+      if (!eventId) {
+        alert('Failed to create event. Please try again.');
+        return;
+      }
+      router.push(`/qr-design/${eventId}`);
+    } catch (err: any) {
+      console.error('Error in handleSubmit:', err);
+      alert('Unexpected error: ' + (err?.message || err));
     }
-    // Redirect to QR design with new eventId
-    router.push(`/qr-design/${eventId}`);
   };
 
   return (
